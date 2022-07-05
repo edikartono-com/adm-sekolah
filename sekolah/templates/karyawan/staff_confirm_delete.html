@@ -1,0 +1,13 @@
+{% extends 'html.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    <div class="alert">
+        <p>Apakah yakin akan menghapus data "{{ object }}"?</p>
+        <p>Semua data yang berhubungan dengan karyawan ini akan dihapus.</p>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Hapus">
+</form>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'html.html' %}
+{% load widget_tweaks %}
+
+{% block page_title %}{% block title %}Buat Invoice Baru{% endblock %}{% endblock %}
+
+{% block breadcrumb %}
+<li><i class="fa fa-laptop"></i>Tagihan</li>
+<li><i class="fa fa-laptop"></i>Baru</li>
+{% endblock breadcrumb %}
+
+{% block heading %}
+Tagihan Baru {% if messages %}{% for message in messages %}<span class="text-success">| {{ message }}</span>{% endfor %}{% endif %}
+{% endblock heading %}
+
+{% block content %}
+    <form method="POST">
+      {% csrf_token %}  
+      <div class="row">
+        <div class="col-sm-6">
+          {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.auto_id }}">
+              {{ field.label }}
+              {% for error in field.errors %}
+              <small id="{{ field.auto_id }}" class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </label>
+            <div class="form-group">
+              {{ field | add_class:"form-control"}}
+              {% if field.help_text %}
+              <small>{{ field.help_text|safe }}</small>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% if items %}
+        <div class="col-sm-6 callout callout-info">
+          {{ items.management_form }}
+          <div class="text-center">Biaya Masuk</div>
+          {% for item in items %}
+          <div class="form-group items-group">
+            {{ item.id }}
+            <div class="form-group"><strong>Fee Type</strong></div>
+            <div class="form-group">{{ item.jumlah | add_class:"form-control"}}</div>
+            <div class="form-group"><strong>Keterangan</strong></div>
+            <div class="form-group">{{ item.deskripsi | add_class:"form-control"}}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    
+      {% if object %}
+      <div class="form-group">
+        <h2>Tanda Terima</h2>
+        <table class="table table-sm">
+          {{ masuk.management_form }}
+          <thead class="thead-light">
+            <tr>
+              <th>Uang Setoran</th>
+              <th>Tanggal Bayar</th>
+              <th>Keterangan</th>
+              <th><i class="fa fa-trash"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ms in masuk %}
+            {% for hidden in ms.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+            <tr>
+              {% for field in ms.visible_fields %}
+              <td>{{ field | add_class:"form-control form-control-sm"}}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+    
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    
+      <div class="form-group">
+        <div class="col-lg-offset-0 col-lg-10">
+          {% if object %}
+          <input type="submit" class="btn btn-primary" value="Update Record"> <div class='btn btn-danger'><i class='fas fa-trash'></i><a href="{% url 'uang:tagihan-delete' pk=object.id %}">Delete</a></div>
+          {% else %}
+          <input type="submit" class="btn btn-primary" value="Add new invoice">
+          {% endif %}
+        </div>
+      </div>
+    </form>
+<hr>
+    
+<script>
+$(".items-group").formset(
+  {
+    prefix: '{{ items.prefix }}',
+    deleteText: "<div class='btn btn-danger btn-circle'><i class='fas fa-trash'></i></div>",
+    addText: "<div class='btn btn-success btn-circle'><i class='fas fa-plus'></i></div>"
+    }
+  )
+</script>
+{% endblock content %}

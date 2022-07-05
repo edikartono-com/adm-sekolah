@@ -1,0 +1,41 @@
+{% extends 'html.html' %}
+
+{% block page_title %}{% block title %}Setting Semester{% endblock %}{% endblock %}
+
+{% block breadcrumb %}
+<li><i class="fa fa-laptop"></i>Setting</li>
+<li><i class="fa fa-laptop"></i>Semester</li>
+{% endblock breadcrumb %}
+
+{% block heading %}
+Semester {% if messages %}{% for message in messages %}<span class="text-success">| {{ message }}</span>{% endfor %}{% endif %}
+{% endblock heading %}
+
+{% block content %}
+<table class="table table-striped table-advance table-hover">
+    <tbody>
+        {% if object_list %}
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object }}</td>
+            <td>
+                {% if object.sekarang == True %}
+                Tahun Pelajaran Saat ini <i class="fa fa-check"></i>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'utama:smt-add' %}" class="btn btn-primary"><i class="icon_plus_alt2"></i></a>
+                <a href="{% url 'utama:smt-edit' object.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a> 
+                <a href="{% url 'utama:smt-del' object.id %}" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td><h2>Belum ada semester</h2></td>
+            <td><a href="{% url 'utama:smt-add' %}">Buat baru</a></td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'html.html' %}
+{% load widget_tweaks %}
+
+{% block page_title %}{% block title %}{% block heading %}{{ title }}{% endblock %}{% endblock %}{% endblock %}
+
+{% block breadcrumb %}
+<li><i class="icon_document_alt"></i>Forms</li>
+<li><i class="fa fa-file-text-o"></i>{{ title }}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<p>Apakah Anda yakin akan {{ title|lower }} <strong>{{ object }}</strong> dan seluruh content yang berhubungan dengannya?</strong></p>
+<div class="alert alert-block alert-danger fade in">
+    <button data-dismiss="alert" class="close close-sm" type="button">
+        <i class="icon-remove"></i>
+    </button>
+    <strong>Peringatan !</strong> Aksi ini tidak dapat dibatalkan
+</div>
+<form method="POST" enctype="multipart/form-data" class="form-horizontal">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Hapus permanen <i class="fa fa-trash-alt"></i></button>
+</form>
+{% endblock content %}

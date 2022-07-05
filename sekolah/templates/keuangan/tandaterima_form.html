@@ -1,0 +1,76 @@
+{% extends 'html.html' %}
+{% load widget_tweaks %}
+
+{% block page_title %}{% block title %}Tanda Terima{% endblock %}{% endblock %}
+
+{% block breadcrumb %}
+<li><i class="fa fa-laptop"></i>Tanda</li>
+<li><i class="fa fa-laptop"></i>Terima</li>
+{% endblock breadcrumb %}
+
+{% block heading %}
+Terima Pembayaran {% if messages %}{% for message in messages %}<span class="text-success">| {{ message }}</span>{% endfor %}{% endif %}
+{% endblock heading %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <form method="post">
+            {% csrf_token %}
+            {% for f in form %}
+            <div class="form-group">
+                {{ f | add_label_class:"control-label" }}
+                <div class="form-group">
+                    {{ f | add_class:"form-control" | safe }}
+                    {{ f.help_text }}
+                </div>
+                {% if f.errors %}
+                <div class="form-group"><i class="far fa-times-circle"></i>{{ f.errors }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% if object %}
+            <input type="submit" class="btn btn-primary" value="Update data">
+            {% else %}
+            <input type="submit" class="btn btn-primary" value="Save">
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="alert alert-info" role="alert">
+            <h3>Ringkasan Pembayaran</h3>
+            {{ tagihan | upper }}
+            <hr>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td>Tahun</td>
+                        <td>{{ tagihan.tahun }}</td>
+                    </tr>
+                    <tr>
+                        <td>Semester</td>
+                        <td>{{ tagihan.smester }}</td>
+                    </tr>
+                    <tr>
+                        <td>Kelas</td>
+                        <td>{{ tagihan.untuk_kelas }}</td>
+                    </tr>
+                    <tr>
+                        <td>Semua Biaya</td>
+                        <td>{{ tagihan.total_harus_dibayar }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sudah dibayar</td>
+                        <td>{{ tagihan.jumlah_total_dibayar }}</td>
+                    </tr>
+                    <tr>
+                        <td>Belum dibayar</td>
+                        <td>{{ tagihan.balance }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

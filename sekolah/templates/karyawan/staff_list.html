@@ -1,0 +1,42 @@
+{% extends 'html.html' %}
+
+{% block heading %}
+<a class="btn btn-primary" href="{% url 'staff:create' %}">Tambah Baru</a>
+{% endblock heading %}
+
+{% block content %}
+<table id="stafftable" class="table table-bordered table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th>No</th>
+            <th>Fullname</th>
+            <th>Gender</th>
+            <th>Mobile Phone Number</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for staff in object_list %}
+        <tr class="clickable-row" data-href="{{ staff.get_absolute_url }}">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ staff.nama }}</td>
+            <td>{{ staff.gender }}</td>
+            <td>{{ staff.nomor_hp }}</td>
+            <td>{{ staff.status_sekarang }}</td>
+            <td><a class="btn btn-success" href="{% url 'staff:update' staff.id %}">Update</a><a class="btn btn-danger" href="{% url 'staff:delete' staff.id %}">Hapus</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td></td>
+            <td>Belum ada karyawan</td>
+            <td></td>
+            <td><a href="{% url 'staff:create' %}">Tambah Karyawan</a></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

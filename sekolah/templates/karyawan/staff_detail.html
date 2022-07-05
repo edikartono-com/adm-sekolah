@@ -1,0 +1,53 @@
+{% extends 'html.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            <h3>{{ object }}</h3>
+            <h5>{{ object.gender }}</h5>
+            <h5>{{ object.tanggal_masuk }}</h5>
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <div>
+            <div class="form-group border-bottom row">
+                <label class="col">
+                    Tanggal Lahir
+                </label>
+                <div class="col">
+                    {{ object.tanggal_lahir }}
+                </div>
+            </div>
+
+            <div class="form-group border-bottom row">
+                <label class="col">
+                    Nomor HP
+                </label>
+                <div class="col">
+                    {{ object.nomor_hp }}
+                </div>
+            </div>
+
+            <div class="form-group border-bottom row">
+                <label class="col">
+                    Alamat
+                </label>
+                <div class="col">
+                    {{ object.alamat }}
+                </div>
+            </div>
+
+            <div class="form-group border-bottom row">
+                <label class="col">
+                    Catatan
+                </label>
+                <div class="col">
+                    {{ object.catatan }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu">
+            <li class="active">
+              <a class="" href="{% url 'utama:dev' %}">
+                            <i class="icon_house_alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;" class="">
+                            <i class="fa fa-cogs"></i>
+                            <span>Setting</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+              <ul class="sub">
+                <li><a class="" href="{% url 'utama:biaya' %}"><span>Biaya Masuk</span></a></li>
+                <li><a class="" href="{% url 'utama:kls-list' %}"><span>Kelas</span></a></li>
+                <li><a class="" href="{% url 'utama:smt-list' %}"><span>Semester</span></a></li>
+                <li><a class="" href="{% url 'utama:ta-list' %}">Tahun Pelajaran</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="" href="{% url 'utama:mpl-list' %}">
+                            <i class="fa fa-book"></i>
+                            <span>Mata Pelajaran</span>  
+                        </a>
+            </li>
+            <li>
+              <a class="" href="{% url 'uang:index' %}">
+                            <i class="fa fa-money"></i>
+                            <span>Keuangan</span>  
+                        </a>
+            </li>
+            <li>
+              <a class="" href="{% url 'siswa:murid' %}">
+                            <i class="fa fa-users"></i>
+                            <span>Siswa</span>  
+                        </a>
+            </li>
+            <li>
+              <a class="" href="{% url 'staff:list' %}">
+                            <i class="fa fa-empire"></i>
+                            <span>Karyawan</span>
+                        </a>
+            </li>
+            <li>
+              <a class="" href="#">
+                            <i class="fa fa-code"></i>
+                            <span>Pengembang</span>  
+                        </a>
+            </li>
+            <li>
+              <a class="" href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out"></i>
+                            <span>Log out</span>
+  
+                        </a>
+            </li>  
+          </ul>
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      <!--sidebar end-->
